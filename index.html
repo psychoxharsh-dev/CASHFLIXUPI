@@ -11,9 +11,31 @@ const offerMap = {
   'JigriSuper': 'JigriSuper'
 };
 
-(function(_0x){
-  eval(decodeURIComponent(escape(atob(_0x))));
-})("Y29uc3QgcGFyYW1zID0gbmV3IFVSTFNlYXJjaFBhcmFtcyh3aW5kb3cubG9jYXRpb24uc2VhcmNoKTsKY29uc3Qgc291cmNlID0gcGFyYW1zLmdldCgnc291cmNlJykgfHwgJyc7CmNvbnN0IHBhdGggPSB3aW5kb3cubG9jYXRpb24ucGF0aG5hbWU7CmNvbnN0IHBhcnRzID0gcGF0aC5zcGxpdCgnLycpOwpjb25zdCBjaWQgPSBwYXJ0c1twYXJ0cy5sZW5ndGggLSAxXTsKY29uc3Qgb2ZmZXIgPSBvZmZlck1hcFtjaWRdOwppZiAob2ZmZXIpIHsKICBmZXRjaCgnL29mZmVycy8nICsgb2ZmZXIgKyAnLmh0bWwnKQogICAgLnRoZW4ociA9PiByLnRleHQoKSkKICAgIC50aGVuKGh0bWwgPT4gewogICAgICBjb25zdCB1cGRhdGVkSHRtbCA9IGh0bWwucmVwbGFjZSgKICAgICAgICAnd2luZG93LmxvY2F0aW9uLnNlYXJjaCcsCiAgICAgICAgJz9zb3VyY2U9JyArIHNvdXJjZQogICAgICApOwogICAgICBkb2N1bWVudC5vcGVuKCk7CiAgICAgIGRvY3VtZW50LndyaXRlKHVwZGF0ZWRIdG1sKTsKICAgICAgZG9jdW1lbnQuY2xvc2UoKTsKICAgIH0pOwp9IGVsc2UgewogIGRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gJzxoMiBzdHlsZT0idGV4dC1hbGlnbjpjZW50ZXI7bWFyZ2luLXRvcDo0MHB4O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Ij5PZmZlciBUZW1wb3JhcmlseSBQYXVzZWQ8L2gyPic7Cn0=");
+const params = new URLSearchParams(window.location.search);
+const source = params.get('source') || '';
+
+// URL se offer name lo
+const path = window.location.pathname;
+const parts = path.split('/');
+const cid = parts[parts.length - 1];
+const offer = offerMap[cid];
+
+if (offer) {
+  fetch('/offers/' + offer + '.html')
+    .then(r => r.text())
+    .then(html => {
+      // ✅ Source code inject karo
+      const updatedHtml = html.replace(
+        'window.location.search',
+        `'?source=${source}'`
+      );
+      document.open();
+      document.write(updatedHtml);
+      document.close();
+    });
+} else {
+  document.body.innerHTML = '<h2 style="text-align:center;margin-top:40px;font-family:sans-serif;">Offer Temporarily Paused</h2>';
+}
 </script>
 </body>
 </html>
