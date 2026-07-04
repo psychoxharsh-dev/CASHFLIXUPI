@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/offer/:cid", "destination": "/index.html" },
+    { "source": "/offer", "destination": "/index.html" }
+  ]
+}
