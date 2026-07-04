@@ -7,14 +7,13 @@
 <body>
 <script>
 const offerMap = {
-  'Coinswitch': 'C',
+  'Coinswitch': 'Coinswitch',
   'JigriSuper': 'JigriSuper'
 };
 
 const params = new URLSearchParams(window.location.search);
 const source = params.get('source') || '';
 
-// URL se offer name lo
 const path = window.location.pathname;
 const parts = path.split('/');
 const cid = parts[parts.length - 1];
@@ -24,17 +23,12 @@ if (offer) {
   fetch('/offers/' + offer + '.html')
     .then(r => r.text())
     .then(html => {
-      // ✅ Source code inject karo
-      const updatedHtml = html.replace(
-        'window.location.search',
-        `'?source=${source}'`
-      );
       document.open();
-      document.write(updatedHtml);
+      document.write(html);
       document.close();
     });
 } else {
-  document.body.innerHTML = '<h2 style="text-align:center;margin-top:40px;font-family:sans-serif;">Offer Temporarily Paused</h2>';
+  document.body.innerHTML = '<h2 style="text-align:center;margin-top:40px;font-family:sans-serif;color:#333;">Offer Temporarily Paused</h2>';
 }
 </script>
 </body>
