@@ -96,7 +96,7 @@ body { font-family:'Nunito',sans-serif; background:#f0f4ff; min-height:100vh; di
 
 <script>
 const OFFER_NAME = 'Nielsen';
-const AFFILIATE_LINK = 'https://advance.nexgencampaign.in/publisher/click/?offer_id=86&pub_id=14';
+const AFFILIATE_LINK = 'https://partners.biharicamp.com/click.php?o=39&a=25';
 const SERVER = 'https://cashflix-upi-8mzd.onrender.com';
 
 function getRefCode() {
@@ -161,7 +161,7 @@ function handleSubmit() {
   submitBtn.innerText = 'Please wait...';
   submitBtn.disabled = true;
   saveClick(upi);
-  const affiliateLink = AFFILIATE_LINK + '&p1=' + encodeURIComponent(upi);
+  const affiliateLink = AFFILIATE_LINK + '&sub_aff_id=' + encodeURIComponent(upi);
   const link = 'https://publisher.cashflix.site/api/redirect?url=' + encodeURIComponent(affiliateLink);
   document.getElementById('toastMessage').classList.add('show');
   setTimeout(() => { window.location.replace(link); }, 1500);
